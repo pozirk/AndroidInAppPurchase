@@ -6,7 +6,7 @@ Supported functionality:
 - restoration of previously purchased items;
 - consumption of items.
 
-Subscriptions are not supproted.
+Subscriptions are not supported.
 
 
 # Installation
