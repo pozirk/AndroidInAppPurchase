@@ -1,5 +1,5 @@
 # About
-AndroidInAppPurchase is an Adobe AIR native extension (ANE) for Android to purchase in-game items.
+AndroidInAppPurchase is an Adobe AIR native extension (ANE) for Android to purchase virtual items.
 It uses Google Play In-app Billing version 3 API.
 Supported functionality:
 - purchase of items;
