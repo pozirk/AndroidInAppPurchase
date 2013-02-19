@@ -34,17 +34,20 @@ public class GetDetailsFunction implements FREFunction
 			
 			Purchase purchase = Billing.getInstance().getPurchaseDetails(sku.getAsString());
 			
-			res.setProperty("_orderId", FREObject.newObject(purchase.getOrderId()));
-			res.setProperty("_packageName", FREObject.newObject(purchase.getPackageName()));
-			res.setProperty("_sku", FREObject.newObject(purchase.getSku()));
-			res.setProperty("_time", FREObject.newObject(purchase.getPurchaseTime()));
-			res.setProperty("_purchaseState", FREObject.newObject(purchase.getPurchaseState()));
-			res.setProperty("_payload", FREObject.newObject(purchase.getDeveloperPayload()));
-			res.setProperty("_token", FREObject.newObject(purchase.getToken()));
-			res.setProperty("_json", FREObject.newObject(purchase.getOriginalJson()));
-			res.setProperty("_signature", FREObject.newObject(purchase.getSignature()));
-			
-			return res;
+			if(purchase != null)
+			{
+				res.setProperty("_orderId", FREObject.newObject(purchase.getOrderId()));
+				res.setProperty("_packageName", FREObject.newObject(purchase.getPackageName()));
+				res.setProperty("_sku", FREObject.newObject(purchase.getSku()));
+				res.setProperty("_time", FREObject.newObject(purchase.getPurchaseTime()));
+				res.setProperty("_purchaseState", FREObject.newObject(purchase.getPurchaseState()));
+				res.setProperty("_payload", FREObject.newObject(purchase.getDeveloperPayload()));
+				res.setProperty("_token", FREObject.newObject(purchase.getToken()));
+				res.setProperty("_json", FREObject.newObject(purchase.getOriginalJson()));
+				res.setProperty("_signature", FREObject.newObject(purchase.getSignature()));
+				
+				return res;
+			}
 		}
 		catch (Exception e)
 		{
