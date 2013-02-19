@@ -32,19 +32,21 @@ public class Billing
 
 	IabHelper _helper;
 	ExtensionContext _ctx;
-	String _sku, _payload;
+	String _sku, _type, _payload;
 	Activity _act;
 	Inventory _inventory;
 	
-	public void schedulePurchase(String sku, String payload)
+	public void schedulePurchase(String sku, String type, String payload)
 	{
 		_sku = sku;
+		_type = type;
+		_payload = payload;
 	}
 	
 	public void purchase(Activity act)
 	{
 		_act = act;
-		_helper.launchPurchaseFlow(act, _sku, RC_REQUEST, _onPurchase, _payload);
+		_helper.launchPurchaseFlow(act, _sku, _type, RC_REQUEST, _onPurchase, _payload);
 	}
 	
 	public boolean handlePurchaseResult(int requestCode, int resultCode, Intent data)
@@ -75,9 +77,9 @@ public class Billing
 		}
 	};
 	
-	public void restore()
+	public void restore(String type)
 	{
-		_helper.queryInventoryAsync(_onRestore);
+		_helper.queryInventoryAsync(type, _onRestore);
 	}
 	
 	IabHelper.QueryInventoryFinishedListener _onRestore = new IabHelper.QueryInventoryFinishedListener()

@@ -290,8 +290,8 @@ public class IabHelper {
      * Same as calling {@link #launchPurchaseFlow(Activity, String, int, OnIabPurchaseFinishedListener, String)}
      * with null as extraData.
      */
-    public void launchPurchaseFlow(Activity act, String sku, int requestCode, OnIabPurchaseFinishedListener listener) {
-        launchPurchaseFlow(act, sku, requestCode, listener, "");
+    public void launchPurchaseFlow(Activity act, String sku, String type, int requestCode, OnIabPurchaseFinishedListener listener) {
+        launchPurchaseFlow(act, sku, type, requestCode, listener, "");
     }
 
     /**
@@ -311,14 +311,15 @@ public class IabHelper {
      *     when the purchase completes. This extra data will be permanently bound to that purchase
      *     and will always be returned when the purchase is queried.
      */
-    public void launchPurchaseFlow(Activity act, String sku, int requestCode, OnIabPurchaseFinishedListener listener, String extraData) {
+    //pozirk: added type param
+    public void launchPurchaseFlow(Activity act, String sku, String type, int requestCode, OnIabPurchaseFinishedListener listener, String extraData) {
         checkSetupDone("launchPurchaseFlow");
         flagStartAsync("launchPurchaseFlow");
         IabResult result;
 
         try {
             logDebug("Constructing buy intent for " + sku);
-            Bundle buyIntentBundle = mService.getBuyIntent(3, mContext.getPackageName(), sku, ITEM_TYPE_INAPP, extraData);
+            Bundle buyIntentBundle = mService.getBuyIntent(3, mContext.getPackageName(), sku, type/*ITEM_TYPE_INAPP*/, extraData);
             int response = getResponseCodeFromBundle(buyIntentBundle);
             if (response != BILLING_RESPONSE_RESULT_OK) {
                 logError("Unable to buy item, Error response: " + getResponseDesc(response));
@@ -463,11 +464,12 @@ public class IabHelper {
      *     if null or if querySkuDetails is false.
      * @throws IabException if a problem occurs while refreshing the inventory.
      */
-    public Inventory queryInventory(boolean querySkuDetails, List<String> moreSkus) throws IabException {
+  //pozirk: added type param
+    public Inventory queryInventory(boolean querySkuDetails, List<String> moreSkus, String type) throws IabException {
         checkSetupDone("queryInventory");
         try {
             Inventory inv = new Inventory();
-            int r = queryPurchases(inv);
+            int r = queryPurchases(inv, type);
             if (r != BILLING_RESPONSE_RESULT_OK) {
                 throw new IabException(r, "Error refreshing inventory (querying owned items).");
             }
@@ -512,8 +514,10 @@ public class IabHelper {
      * @param moreSkus as in {@link #queryInventory}
      * @param listener The listener to notify when the refresh operation completes.
      */
+    //pozirk: added type param
     public void queryInventoryAsync(final boolean querySkuDetails,
                                final List<String> moreSkus,
+                               final String type,
                                final QueryInventoryFinishedListener listener) {
         final Handler handler = new Handler();
         checkSetupDone("queryInventory");
@@ -523,7 +527,7 @@ public class IabHelper {
                 IabResult result = new IabResult(BILLING_RESPONSE_RESULT_OK, "Inventory refresh successful.");
                 Inventory inv = null;
                 try {
-                    inv = queryInventory(querySkuDetails, moreSkus);
+                    inv = queryInventory(querySkuDetails, moreSkus, type);
                 }
                 catch (IabException ex) {
                     result = ex.getResult();
@@ -542,12 +546,12 @@ public class IabHelper {
         })).start();
     }
 
-    public void queryInventoryAsync(QueryInventoryFinishedListener listener) {
-        queryInventoryAsync(true, null, listener);
+    public void queryInventoryAsync(String type, QueryInventoryFinishedListener listener) {
+        queryInventoryAsync(true, null, type, listener);
     }
 
-    public void queryInventoryAsync(boolean querySkuDetails, QueryInventoryFinishedListener listener) {
-        queryInventoryAsync(querySkuDetails, null, listener);
+    public void queryInventoryAsync(boolean querySkuDetails, String type, QueryInventoryFinishedListener listener) {
+        queryInventoryAsync(querySkuDetails, null, type, listener);
     }
 
 
@@ -726,7 +730,8 @@ public class IabHelper {
     }
 
 
-    int queryPurchases(Inventory inv) throws JSONException, RemoteException {
+    //pozirk: added type param
+    int queryPurchases(Inventory inv, String type) throws JSONException, RemoteException {
         // Query purchases
         logDebug("Querying owned items...");
         logDebug("Package name: " + mContext.getPackageName());
@@ -737,7 +742,7 @@ public class IabHelper {
         do {
             logDebug("Calling getPurchases with continuation token: " + continueToken);
             Bundle ownedItems = mService.getPurchases(3, mContext.getPackageName(),
-                    ITEM_TYPE_INAPP, continueToken);
+                    type/*ITEM_TYPE_INAPP*/, continueToken);
 
             int response = getResponseCodeFromBundle(ownedItems);
             logDebug("Owned items response: " + String.valueOf(response));

@@ -29,12 +29,20 @@ public class PurchaseFunction implements FREFunction
 		try
 		{
 			FREObject sku = arg1[0];
-			FREObject payload = arg1[1];
+			FREObject type = arg1[1];
+			FREObject payload = arg1[2];
 			
-			Billing.getInstance().schedulePurchase(sku.getAsString(), (payload == null ? null : payload.getAsString()));
+			if(sku == null || sku.getAsString().length() == 0)
+				Billing.getInstance()._ctx.dispatchStatusEventAsync("PURCHASE_ERROR", "Invalid product id.");
+			else if(type == null || type.getAsString().length() == 0)
+				Billing.getInstance()._ctx.dispatchStatusEventAsync("PURCHASE_ERROR", "Invalid purchase type.");
+			else //everything's ok
+			{
+				Billing.getInstance().schedulePurchase(sku.getAsString(), type.getAsString(), (payload == null ? null : payload.getAsString()));
 			
-			Intent intent = new Intent(arg0.getActivity(), BillingActivity.class);
-			arg0.getActivity().startActivity(intent);
+				Intent intent = new Intent(arg0.getActivity(), BillingActivity.class);
+				arg0.getActivity().startActivity(intent);
+			}
 		}
 		catch (Exception e)
 		{
