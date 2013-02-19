@@ -4,9 +4,8 @@ It uses Google Play In-app Billing version 3 API.
 Supported functionality:
 - purchase of items;
 - restoration of previously purchased items;
-- consumption of items.
-
-Subscriptions are not supported.
+- consumption of items;
+- subscriptions.
 
 
 # Installation
@@ -19,7 +18,7 @@ Add the following lines to your AIR Aplication-app.xml file inside <manifestAddi
  </application>
 
 
-# Usage examples
+# Examples
 import com.pozirk.payment.android.InAppPurchase;
 import com.pozirk.payment.android.InAppPurchaseEvent;
 import com.pozirk.payment.android.InAppPurchaseDetails;
@@ -41,14 +40,14 @@ _iap.init("YOUR_LICENSE_KEY_FOR_THE_APPLICATION");
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);
-_iap.purchase("my.product.id");
+_iap.purchase("my.product.id", InAppPurchase.TYPE_INAPP);
 //<
 
 
-//> getting already purchased products
+//> getting already purchased products(subscriptions)
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
-_iap.restore();
+_iap.restore(InAppPurchase.TYPE_SUBS);
 
 ...
 
@@ -73,3 +72,7 @@ protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 	_iap.consume("my.product.id");
 }
 //<
+
+
+# Testing
+http://developer.android.com/google/play/billing/billing_testing.html
