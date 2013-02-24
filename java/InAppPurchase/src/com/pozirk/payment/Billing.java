@@ -150,8 +150,8 @@ public class Billing
 			{
 				if(!result.isSuccess())
 					_ctx.dispatchStatusEventAsync("INIT_ERROR", result.getMessage());
-				
-				_ctx.dispatchStatusEventAsync("INIT_SUCCESS", "ku-ku");
+				else
+					_ctx.dispatchStatusEventAsync("INIT_SUCCESS", "ku-ku");
 			}
 		});
 	}
