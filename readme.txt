@@ -7,6 +7,9 @@ Supported functionality:
 - consumption of items;
 - subscriptions.
 
+# Docs
+http://help.adobe.com/en_US/air/extensions/index.html
+
 
 # Installation
 Add "InAppPurchase.ane" and "as3\InAppPurchase\bin\InAppPurchase.swc" to your AIR project
@@ -29,10 +32,21 @@ _iap:InAppPurchase = new InAppPurchase();
 
 _iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);
 _iap.addEventListener(InAppPurchaseEvent.INIT_ERROR, onInitError);
-_iap.addEventListener(InAppPurchaseEvent.CONSUME_SUCCESS, onConsumeSuccess);
-_iap.addEventListener(InAppPurchaseEvent.CONSUME_ERROR, onConsumeError);
 
 _iap.init("YOUR_LICENSE_KEY_FOR_THE_APPLICATION");
+
+...
+
+protected function onInitSuccess(event:InAppPurchaseEvent):void
+{
+	...
+}
+
+protected function onInitError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+	...
+}
 //<
 
 
@@ -41,6 +55,12 @@ _iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);
 _iap.purchase("my.product.id", InAppPurchase.TYPE_INAPP);
+
+protected function onPurchaseError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+	...
+}
 //<
 
 
@@ -54,6 +74,13 @@ _iap.restore(InAppPurchase.TYPE_SUBS);
 protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 {
 	var purchase:InAppPurchaseDetails = _iap.getDetails("my.product.id");
+	...
+}
+
+protected function onRestoreError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+	...
 }
 //<
 
@@ -73,6 +100,10 @@ protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 }
 //<
 
+
+# Game with in-app purchase
+https://play.google.com/store/apps/details?id=air.com.pozirk.allinonesolitaire
+Just click "star" character in main menu
 
 # Testing
 http://developer.android.com/google/play/billing/billing_testing.html
