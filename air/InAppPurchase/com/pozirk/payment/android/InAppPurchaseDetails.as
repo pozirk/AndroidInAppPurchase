@@ -27,5 +27,7 @@ package com.pozirk.payment.android
 		public var _token:String;
 		public var _json:String; //original json data with all the purchase details
 		public var _signature:String;
+		
+		public function InAppPurchaseDetails() {}
 	}
 }

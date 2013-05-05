@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\Pozirk\\_projects\\AndroidInAppPurchase\\java\\InAppPurchase\\src\\com\\android\\vending\\billing\\IInAppBillingService.aidl
+ * Original file: D:\\Pozirk\\_projects\\ANEInAppPurchase\\android\\InAppPurchase\\src\\com\\android\\vending\\billing\\IInAppBillingService.aidl
  */
 package com.android.vending.billing;
 /**

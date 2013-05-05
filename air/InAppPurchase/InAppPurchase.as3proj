@@ -16,7 +16,7 @@
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
     <class path="." />
-    <class path="C:\Program Files (x86)\Adobe\AIR3.5\frameworks\libs\air" />
+    <class path="C:\Program Files (x86)\Adobe\AIR3.7\frameworks\libs\air" />
   </classpaths>
   <!-- Build options -->
   <build>
@@ -55,7 +55,7 @@
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
-    <element path="C:\Program Files (x86)\Adobe\AIR3.5\frameworks\libs\air\airglobal.swc" />
+    <element path="C:\Program Files (x86)\Adobe\AIR3.7\frameworks\libs\air\airglobal.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

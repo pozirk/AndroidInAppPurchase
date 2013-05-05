@@ -1,11 +1,11 @@
-rm java\InAppPurchase\build\libInAppPurchase.jar
+del android\InAppPurchase\build\libInAppPurchase.jar
 
-rm InAppPurchase.ane
+del InAppPurchase.ane
 
-xcopy java\InAppPurchase\bin\classes java\InAppPurchase\bin /S /Y /R
+xcopy android\InAppPurchase\bin\classes android\InAppPurchase\bin /S /Y /R
 
-rd java\InAppPurchase\bin\classes /S /Q
+rd android\InAppPurchase\bin\classes /S /Q
 
-jar.exe cvf java/InAppPurchase/build/libInAppPurchase.jar -C java/InAppPurchase/bin .
+"c:\Program Files (x86)\Java\jdk1.7.0_13\bin\jar.exe" cvf android/InAppPurchase/build/libInAppPurchase.jar -C android/InAppPurchase/bin .
 
-adt.bat -package -target ane InAppPurchase.ane as3/extension.xml -swc as3/InAppPurchase/bin/InAppPurchase.swc -platform Android-ARM -C java/InAppPurchase/build/ .
+"c:\Program Files (x86)\Adobe\AIR3.7\bin\adt.bat" -package -target ane InAppPurchase.ane air/extension.xml -swc air/InAppPurchase/bin/InAppPurchase.swc -platform Android-ARM -C android/InAppPurchase/build/ .
