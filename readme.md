@@ -12,7 +12,7 @@ http://help.adobe.com/en_US/air/extensions/index.html
 
 
 # Installation
-Add "InAppPurchase.ane" and "as3\InAppPurchase\bin\InAppPurchase.swc" to your AIR project
+Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project
 
 Add the following lines to your AIR Aplication-app.xml file inside <manifestAdditions> section:
 <uses-permission android:name="com.android.vending.BILLING" />
