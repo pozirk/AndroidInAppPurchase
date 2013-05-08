@@ -5,7 +5,7 @@ Supported functionality:
 - purchase of items;
 - restoration of previously purchased items;
 - consumption of items;
-- subscriptions.
+- subscriptions (not tested).
 
 # Docs
 http://help.adobe.com/en_US/air/extensions/index.html
@@ -39,56 +39,59 @@ _iap.init("YOUR_LICENSE_KEY_FOR_THE_APPLICATION");
 
 protected function onInitSuccess(event:InAppPurchaseEvent):void
 {
-	...
+	//you can restore previously purchased items here
 }
 
 protected function onInitError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
-	...
 }
 //<
 
 
-//> making the purchase
+//> making the purchase, _iap should be initialized first
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);
-_iap.purchase("my.product.id", InAppPurchase.TYPE_INAPP);
+_iap.purchase("my.product.id", InAppPurchaseDetails.TYPE_INAPP);
+
+protected function onPurchaseSuccess(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //product id
+}
 
 protected function onPurchaseError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
-	...
 }
 //<
 
 
-//> getting already purchased products(subscriptions)
+//> getting already purchased products(subscriptions), _iap should be initialized first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
-_iap.restore(InAppPurchase.TYPE_SUBS);
+_iap.restore(); //restore both in-app items and subscriptions
 
 ...
 
 protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 {
 	var purchase:InAppPurchaseDetails = _iap.getDetails("my.product.id");
-	...
 }
 
 protected function onRestoreError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
-	...
 }
 //<
 
 
 //> consuming purchased item
+//>> need to restore items first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 _iap.restore();
+//<
 
 ...
 

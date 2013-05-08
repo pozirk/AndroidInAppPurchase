@@ -23,9 +23,6 @@ package com.pozirk.payment.android
 
 	public class InAppPurchase extends EventDispatcher
 	{
-		public static const TYPE_INAPP:String = "inapp"; //regular in-app items
-		public static const TYPE_SUBS:String = "subs"; //subscription
-		
 		protected var _ctx:ExtensionContext;
 		
 		public function InAppPurchase()
@@ -58,12 +55,11 @@ package com.pozirk.payment.android
 		}
 		
 		/**
-		 * Restore the list of previously made purchases
-		 * @param	type type of purchase, regular item (TYPE_INAPP) or subscription (TYPE_SUBS)
+		 * Restore the list of previously made purchases, both in-app and subs
 		 */
-		public function restore(type:String):void
+		public function restore():void
 		{
-			_ctx.call("restore", type);
+			_ctx.call("restore");
 		}
 		
 		/**

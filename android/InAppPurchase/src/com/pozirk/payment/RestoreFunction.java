@@ -27,14 +27,17 @@ public class RestoreFunction implements FREFunction
 	{
 		try
 		{
-			FREObject type = arg1[0];
+			/*FREObject type = arg1[0];
 			if(type == null || type.getAsString().length() == 0) //just in case
 				Billing.getInstance()._ctx.dispatchStatusEventAsync("RESTORE_ERROR", "Invalid purchase type.");
 			else //everything's ok
 			{
 				Billing billing = Billing.getInstance();
 				billing.restore(type.getAsString());
-			}
+			}*/
+			
+			Billing billing = Billing.getInstance();
+			billing.restore();
 		}
 		catch (Exception e)
 		{

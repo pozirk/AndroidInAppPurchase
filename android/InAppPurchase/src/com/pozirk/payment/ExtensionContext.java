@@ -19,6 +19,7 @@ package com.pozirk.payment;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 
@@ -45,6 +46,9 @@ public class ExtensionContext extends FREContext
 	@Override 
     public void dispose()
 	{ 
-		//looks like nothing to dispose? 
+		//here or in Extnesion?
+		Billing billing = Billing.getInstance();
+		if(billing != null)
+			billing.dispose(); 
     } 
 }

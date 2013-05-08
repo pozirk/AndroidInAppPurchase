@@ -26,34 +26,34 @@ import android.widget.RelativeLayout;
 public class BillingActivity extends Activity
 {	
 	@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+  protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-        // Pass on the activity result to the helper for handling
-        if (!Billing.getInstance().handlePurchaseResult(requestCode, resultCode, data))
-        {
-            // not handled, so handle it ourselves (here's where you'd
-            // perform any handling of activity results not related to in-app
-            // billing...
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+    // Pass on the activity result to the helper for handling
+    if (!Billing.getInstance().handlePurchaseResult(requestCode, resultCode, data))
+    {
+        // not handled, so handle it ourselves (here's where you'd
+        // perform any handling of activity results not related to in-app
+        // billing...
+        super.onActivityResult(requestCode, resultCode, data);
+    }
     }
 	
 	@Override
-    public void onCreate(Bundle savedInstanceState)
+  public void onCreate(Bundle savedInstanceState)
 	{
-        super.onCreate(savedInstanceState);
-        
-        //> make a nice spinning circle in the center of the screen
-        ProgressBar progress = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
-        
-        RelativeLayout layout = new RelativeLayout(this);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
-        layout.addView(progress, params);
-        
-        setContentView(layout);
-        //<
-        
-        Billing.getInstance().purchase(this);
+    super.onCreate(savedInstanceState);
+    
+    //> make a nice spinning circle in the center of the screen
+    ProgressBar progress = new ProgressBar(this, null, android.R.attr.progressBarStyleLarge);
+    
+    RelativeLayout layout = new RelativeLayout(this);
+    RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+    params.addRule(RelativeLayout.CENTER_IN_PARENT);
+    layout.addView(progress, params);
+    
+    setContentView(layout);
+    //<
+    
+    Billing.getInstance().purchase(this);
 	}
 }

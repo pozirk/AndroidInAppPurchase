@@ -45,9 +45,14 @@ public class Billing
 	
 	public void purchase(Activity act)
 	{
-		_act = act;
-		_helper.launchPurchaseFlow(act, _sku, _type, RC_REQUEST, _onPurchase, _payload);
+		if(_helper.isAsyncInProgress() == false) //to prevent starting another async operation
+		{
+			_act = act;
+			_helper.launchPurchaseFlow(act, _sku, _type, RC_REQUEST, _onPurchase, _payload);
+		}
 	}
+	
+	public Activity activity() {return _act;}
 	
 	public boolean handlePurchaseResult(int requestCode, int resultCode, Intent data)
 	{
@@ -73,13 +78,15 @@ public class Billing
 			else
 				_ctx.dispatchStatusEventAsync("PURCHASE_ERROR", purchase.getSku());
 			
-			Billing.getInstance()._act.finish();			
+			Billing.getInstance()._act.finish();
+			_act = null;
 		}
 	};
 	
-	public void restore(String type)
+	//now query both regular items and subscriptions
+	public void restore(/*String type*/)
 	{
-		_helper.queryInventoryAsync(type, _onRestore);
+		_helper.queryInventoryAsync(/*type, */_onRestore);
 	}
 	
 	IabHelper.QueryInventoryFinishedListener _onRestore = new IabHelper.QueryInventoryFinishedListener()

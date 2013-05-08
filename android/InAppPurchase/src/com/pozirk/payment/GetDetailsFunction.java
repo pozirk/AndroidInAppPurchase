@@ -36,6 +36,7 @@ public class GetDetailsFunction implements FREFunction
 			
 			if(purchase != null)
 			{
+				res.setProperty("_type", FREObject.newObject(purchase.getItemType()));
 				res.setProperty("_orderId", FREObject.newObject(purchase.getOrderId()));
 				res.setProperty("_packageName", FREObject.newObject(purchase.getPackageName()));
 				res.setProperty("_sku", FREObject.newObject(purchase.getSku()));

@@ -18,6 +18,10 @@ package com.pozirk.payment.android
 {
 	public class InAppPurchaseDetails
 	{
+		public static const TYPE_INAPP:String = "inapp"; //regular in-app item
+		public static const TYPE_SUBS:String = "subs"; //subscription
+		
+		public var _type:String; //TYPE_INAPP or TYPE_SUBS
 		public var _orderId:String;
 		public var _packageName:String;
 		public var _sku:String;
