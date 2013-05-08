@@ -54,6 +54,15 @@ public class Billing
 	
 	public Activity activity() {return _act;}
 	
+	public void endPurchase(Activity act)
+	{
+		if(act == _act) //I guess :), that Activities are created and destroyed asynchronously, so don't let to null wrong Activity
+		{
+			_act = null;
+			_helper.flagEndAsync();
+		}
+	}
+	
 	public boolean handlePurchaseResult(int requestCode, int resultCode, Intent data)
 	{
 		return _helper.handleActivityResult(requestCode, resultCode, data);

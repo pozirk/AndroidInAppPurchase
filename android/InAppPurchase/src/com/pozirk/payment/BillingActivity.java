@@ -36,7 +36,7 @@ public class BillingActivity extends Activity
         // billing...
         super.onActivityResult(requestCode, resultCode, data);
     }
-    }
+  }
 	
 	@Override
   public void onCreate(Bundle savedInstanceState)
@@ -56,4 +56,11 @@ public class BillingActivity extends Activity
     
     Billing.getInstance().purchase(this);
 	}
+	
+	@Override
+  public void onDestroy() //called (so Activity is destroyed) when app reopened from app drawer, what is suxxx
+	{
+		Billing.getInstance().endPurchase(this); //we were in the middle of purchase, reset it
+    super.onDestroy();
+  }
 }
