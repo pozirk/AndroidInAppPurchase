@@ -8,6 +8,8 @@ Supported functionality:
 - subscriptions (not tested).
 
 # Docs
+Please, read docs and try ANE before asking any questions.
+http://developer.android.com/google/play/billing/index.html
 http://help.adobe.com/en_US/air/extensions/index.html
 
 
@@ -87,11 +89,11 @@ protected function onRestoreError(event:InAppPurchaseEvent):void
 
 
 //> consuming purchased item
-//>> need to restore items first
+//>> need to retrieve purchased items first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 _iap.restore();
-//<
+//<<
 
 ...
 
