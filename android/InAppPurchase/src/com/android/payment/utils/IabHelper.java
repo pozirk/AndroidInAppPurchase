@@ -561,7 +561,7 @@ public class IabHelper {
                 }
 
                 if (querySkuDetails) {
-                    r = querySkuDetails(ITEM_TYPE_SUBS, inv, moreItemSkus);
+                    r = querySkuDetails(ITEM_TYPE_SUBS, inv, moreSubsSkus); //pozirk: was moreItemSkus before
                     if (r != BILLING_RESPONSE_RESULT_OK) {
                         throw new IabException(r, "Error refreshing inventory (querying prices of subscriptions).");
                     }
@@ -599,11 +599,13 @@ public class IabHelper {
      * call from a UI thread.
      *
      * @param querySkuDetails as in {@link #queryInventory}
-     * @param moreSkus as in {@link #queryInventory}
+     * @param moreItemSkus as in {@link #queryInventory} //pozirk
+     * @param moreSubsSkus as in {@link #queryInventory} //pozirk
      * @param listener The listener to notify when the refresh operation completes.
      */
     public void queryInventoryAsync(final boolean querySkuDetails,
-                               final List<String> moreSkus,
+                               final List<String> moreItemSkus, //pozirk: yeah, it was very hard to make the support of subscriptions
+                               final List<String> moreSubsSkus, //pozirk
                                final QueryInventoryFinishedListener listener) {
         final Handler handler = new Handler();
         checkNotDisposed();
@@ -614,7 +616,7 @@ public class IabHelper {
                 IabResult result = new IabResult(BILLING_RESPONSE_RESULT_OK, "Inventory refresh successful.");
                 Inventory inv = null;
                 try {
-                    inv = queryInventory(querySkuDetails, moreSkus);
+                    inv = queryInventory(querySkuDetails, moreItemSkus, moreSubsSkus);  //pozirk
                 }
                 catch (IabException ex) {
                     result = ex.getResult();
@@ -636,11 +638,11 @@ public class IabHelper {
     }
 
     public void queryInventoryAsync(QueryInventoryFinishedListener listener) {
-        queryInventoryAsync(true, null, listener);
+        queryInventoryAsync(true, null, null, listener);
     }
 
     public void queryInventoryAsync(boolean querySkuDetails, QueryInventoryFinishedListener listener) {
-        queryInventoryAsync(querySkuDetails, null, listener);
+        queryInventoryAsync(querySkuDetails, null, null, listener);
     }
 
 

@@ -55,9 +55,9 @@ package com.pozirk.payment.android
 		}
 		
 		/**
-		 * Restore the list of previously made purchases, both in-app and subs
+		 * Restore the list of previously purchased products, both in-app and subs
 		 */
-		public function restore():void
+		public function restore(items:Vector.<String> = null, subs:Vector.<String> = null):void
 		{
 			_ctx.call("restore");
 		}
@@ -67,9 +67,19 @@ package com.pozirk.payment.android
 		 * @param	sku product id
 		 * @return purchase details
 		 */
-		public function getDetails(sku:String):InAppPurchaseDetails
+		public function getPurchaseDetails(sku:String):InAppPurchaseDetails
 		{
-			return _ctx.call("getDetails", sku) as InAppPurchaseDetails;
+			return _ctx.call("getPurchaseDetails", sku) as InAppPurchaseDetails;
+		}
+		
+		/**
+		 * Get details about the product: title, price, id, etc.
+		 * @param	sku product id
+		 * @return product details
+		 */
+		public function getSkuDetails(sku:String):InAppSkuDetails
+		{
+			return _ctx.call("getSkuDetails", sku) as InAppSkuDetails;
 		}
 		
 		/**

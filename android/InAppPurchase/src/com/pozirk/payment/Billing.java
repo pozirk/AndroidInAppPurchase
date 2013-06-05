@@ -16,10 +16,13 @@
 
 package com.pozirk.payment;
 
+import java.util.List;
+
 import com.android.payment.utils.IabHelper;
 import com.android.payment.utils.IabResult;
 import com.android.payment.utils.Inventory;
 import com.android.payment.utils.Purchase;
+import com.android.payment.utils.SkuDetails;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -93,9 +96,9 @@ public class Billing
 	};
 	
 	//now query both regular items and subscriptions
-	public void restore(/*String type*/)
+	public void restore(List<String> items, List<String> subs)
 	{
-		_helper.queryInventoryAsync(/*type, */_onRestore);
+		_helper.queryInventoryAsync(true, items, subs, _onRestore);
 	}
 	
 	IabHelper.QueryInventoryFinishedListener _onRestore = new IabHelper.QueryInventoryFinishedListener()
@@ -141,6 +144,14 @@ public class Billing
 	{
 		if(_inventory != null)
 			return _inventory.getPurchase(sku);
+		
+		return null;
+	}
+	
+	public SkuDetails getSKuDetails(String sku)
+	{
+		if(_inventory != null)
+			return _inventory.getSkuDetails(sku);
 		
 		return null;
 	}

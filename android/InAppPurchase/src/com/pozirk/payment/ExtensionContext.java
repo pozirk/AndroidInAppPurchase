@@ -39,7 +39,8 @@ public class ExtensionContext extends FREContext
 		functionMap.put("purchase", new PurchaseFunction());
 		functionMap.put("restore", new RestoreFunction());
 		functionMap.put("consume", new ConsumeFunction());
-		functionMap.put("getDetails", new GetDetailsFunction());
+		functionMap.put("getPurchaseDetails", new GetPurchaseDetailsFunction());
+		functionMap.put("getSkuDetails", new GetSkuDetailsFunction());
 		return functionMap;	
 	}
 
