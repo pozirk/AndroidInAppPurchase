@@ -57,9 +57,9 @@ package com.pozirk.payment.android
 		/**
 		 * Restore the list of previously purchased products, both in-app and subs
 		 */
-		public function restore(items:Vector.<String> = null, subs:Vector.<String> = null):void
+		public function restore(items:Array = null, subs:Array = null):void
 		{
-			_ctx.call("restore");
+			_ctx.call("restore", items, subs);
 		}
 		
 		/**

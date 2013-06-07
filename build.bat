@@ -11,4 +11,4 @@ rd android\InAppPurchase\bin\classes /S /Q
 SET PLATFORM_ANDROID= -platform Android-ARM -C android\InAppPurchase\build\ .
 SET PLATFORM_DEFAULT= -platform default -C default\ .
 
-"c:\Program Files (x86)\Adobe\AIR3.7\bin\adt.bat" -package -target ane InAppPurchase.ane air\extension.xml -swc air/InAppPurchase/bin/InAppPurchase.swc %PLATFORM_ANDROID% %PLATFORM_DEFAULT%
+"c:\Program Files (x86)\Adobe\AIR3.6\bin\adt.bat" -package -target ane InAppPurchase.ane air\extension.xml -swc air/InAppPurchase/bin/InAppPurchase.swc %PLATFORM_ANDROID% %PLATFORM_DEFAULT%

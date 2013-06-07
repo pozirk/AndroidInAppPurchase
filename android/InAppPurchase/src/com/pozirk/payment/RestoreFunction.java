@@ -19,6 +19,8 @@ package com.pozirk.payment;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.util.Log;
+
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
@@ -36,23 +38,33 @@ public class RestoreFunction implements FREFunction
 			
 			Billing billing = Billing.getInstance();
 			
-			List<String> items = new ArrayList<String>();
-			long len = freItems.getLength(), i;
+			List<String> items = null;
+			List<String> subs = null;
 			FREObject freObj;
-			for(i = 0; i < len; i++)
+			long len, i;
+			
+			if(freItems != null && freItems.getLength() > 0)
 			{
-				freObj = freItems.getObjectAt(i);
-				if(freObj != null)
-					items.add(freObj.getAsString());
+				items = new ArrayList<String>();
+				len = freItems.getLength();
+				for(i = 0; i < len; i++)
+				{
+					freObj = freItems.getObjectAt(i);
+					if(freObj != null)
+						items.add(freObj.getAsString());
+				}
 			}
 			
-			List<String> subs = new ArrayList<String>();
-			len = freSubs.getLength();
-			for(i = 0; i < len; i++)
+			if(freSubs != null && freSubs.getLength() > 0)
 			{
-				freObj = freSubs.getObjectAt(i);
-				if(freObj != null)
-					items.add(freObj.getAsString());
+				subs = new ArrayList<String>();
+				len = freSubs.getLength();
+				for(i = 0; i < len; i++)
+				{
+					freObj = freSubs.getObjectAt(i);
+					if(freObj != null)
+						items.add(freObj.getAsString());
+				}
 			}
 			
 			billing.restore(items, subs);
