@@ -45,7 +45,6 @@ local.properties
 [Dd]ebug/
 [Rr]elease/
 x64/
-build/
 [Oo]bj/
 
 # MSTest test Results
@@ -191,7 +190,6 @@ $RECYCLE.BIN/
 *.egg
 *.egg-info
 dist/
-build/
 eggs/
 parts/
 var/
