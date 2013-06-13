@@ -69,10 +69,10 @@ protected function onPurchaseError(event:InAppPurchaseEvent):void
 //<
 
 
-//> getting purchased products details, _iap should be initialized first
+//> getting purchased product details, _iap should be initialized first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
-_iap.restore(); //restoring both in-app items and subscriptions
+_iap.restore(); //restoring purchased in-app items and subscriptions
 
 ...
 
@@ -87,13 +87,13 @@ protected function onRestoreError(event:InAppPurchaseEvent):void
 }
 //<
 
-//> getting available products details
+//> getting purchased and not purchased product details
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 
 var items:Array<String> = ["my.product.id1", "my.product.id2", "my.product.id3"];
 var subs:Array<String> = ["my.subs.id1", "my.subs.id2", "my.subs.id3"];
-_iap.restore(items, subs); //restoring both in-app items and subscriptions
+_iap.restore(items, subs); //restoring purchased + not purchased in-app items and subscriptions
 
 ...
 
@@ -101,6 +101,8 @@ protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 {
 	var skuDetails1:InAppSkuDetails = _iap.getSkuDetails("my.product.id1"); //getting details of product: time, etc.
 	var skuDetails2:InAppSkuDetails = _iap.getSkuDetails("my.subs.id1"); //getting details of product: time, etc.
+	
+	var purchase:InAppPurchaseDetails = _iap.getPurchaseDetails("my.purchased.product.id"); //getting details of purchase: time, etc.
 }
 
 protected function onRestoreError(event:InAppPurchaseEvent):void
