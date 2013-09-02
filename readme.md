@@ -16,6 +16,7 @@ http://help.adobe.com/en_US/air/extensions/index.html<br />
 # Installation
 Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project.<br />
 Add the following lines to your AIR Aplication-app.xml file inside &lt;manifestAdditions&gt; section:<br />
+<br />
 &lt;uses-permission android:name="com.android.vending.BILLING" /&gt;<br />
 &lt;application android:enabled="true"&gt;<br />
 	&lt;activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" /&gt;<br />
@@ -141,5 +142,5 @@ http://developer.android.com/google/play/billing/billing_testing.html
 # Misc
 ANE is build with AIR3.6, in order to rebuild for another version do the following:<br />
 - edit "air\extension.xml" and change 3.6 in very first line to any 3.X you need;<br />
-- edit "build.bat" and in the very last line change path from AIR3.7 SDK to any AIR3.X SDK you need;<br />
+- edit "build.bat" and in the very last line change path from AIR3.X SDK to any AIR3.X SDK you need;<br />
 - execute "build.bat" to repack the ANE.<br />
