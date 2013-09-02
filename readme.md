@@ -17,10 +17,10 @@ http://help.adobe.com/en_US/air/extensions/index.html
 Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project
 
 Add the following lines to your AIR Aplication-app.xml file inside <manifestAdditions> section:
-<uses-permission android:name="com.android.vending.BILLING" />
-<application android:enabled="true">                
-      <activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" />
- </application>
+&lt;uses-permission android:name="com.android.vending.BILLING" /&gt;
+&lt;application android:enabled="true"&gt;                
+      &lt;activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" /&gt;
+ &lt;/application&gt;
 
 
 # Examples
@@ -29,7 +29,7 @@ import com.pozirk.payment.android.InAppPurchaseEvent;
 import com.pozirk.payment.android.InAppPurchaseDetails;
 
 
-//> initialization of InAppPurchase
+//&gt; initialization of InAppPurchase
 _iap:InAppPurchase = new InAppPurchase();
 
 _iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);
@@ -48,10 +48,10 @@ protected function onInitError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
 }
-//<
+//&lt;
 
 
-//> making the purchase, _iap should be initialized first
+//&gt; making the purchase, _iap should be initialized first
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);
 _iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);
@@ -66,10 +66,10 @@ protected function onPurchaseError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
 }
-//<
+//&lt;
 
 
-//> getting purchased product details, _iap should be initialized first
+//&gt; getting purchased product details, _iap should be initialized first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 _iap.restore(); //restoring purchased in-app items and subscriptions
@@ -85,14 +85,14 @@ protected function onRestoreError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
 }
-//<
+//&lt;
 
-//> getting purchased and not purchased product details
+//&gt; getting purchased and not purchased product details
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 
-var items:Array<String> = ["my.product.id1", "my.product.id2", "my.product.id3"];
-var subs:Array<String> = ["my.subs.id1", "my.subs.id2", "my.subs.id3"];
+var items:Array&lt;String&gt; = ["my.product.id1", "my.product.id2", "my.product.id3"];
+var subs:Array&lt;String&gt; = ["my.subs.id1", "my.subs.id2", "my.subs.id3"];
 _iap.restore(items, subs); //restoring purchased + not purchased in-app items and subscriptions
 
 ...
@@ -109,15 +109,15 @@ protected function onRestoreError(event:InAppPurchaseEvent):void
 {
 	trace(event.data); //trace error message
 }
-//<
+//&lt;
 
 
-//> consuming purchased item
-//>> need to retrieve purchased items first
+//&gt; consuming purchased item
+//&gt;&gt; need to retrieve purchased items first
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
 _iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
 _iap.restore();
-//<<
+//&lt;&lt;
 
 ...
 
@@ -127,7 +127,7 @@ protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 	_iap.addEventListener(InAppPurchaseEvent.CONSUME_ERROR, onConsumeError);
 	_iap.consume("my.product.id");
 }
-//<
+//&lt;
 
 
 # Game with in-app purchase
