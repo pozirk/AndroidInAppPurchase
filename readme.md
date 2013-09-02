@@ -14,9 +14,10 @@ http://help.adobe.com/en_US/air/extensions/index.html
 
 
 # Installation
-Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project
+Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project.
 
 Add the following lines to your AIR Aplication-app.xml file inside &lt;manifestAdditions&gt; section:
+
 &lt;uses-permission android:name="com.android.vending.BILLING" /&gt;
 &lt;application android:enabled="true"&gt;                
       &lt;activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" /&gt;
@@ -128,11 +129,6 @@ protected function onRestoreSuccess(event:InAppPurchaseEvent):void
 	_iap.consume("my.product.id");
 }
 //&lt;
-
-
-# Game with in-app purchase
-https://play.google.com/store/apps/details?id=air.com.pozirk.allinonesolitaire
-Just click "star" character in main menu
 
 
 # Testing
