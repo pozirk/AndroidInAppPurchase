@@ -24,115 +24,117 @@ Add the following lines to your AIR Aplication-app.xml file inside &lt;manifestA
 
 
 # Examples
-import com.pozirk.payment.android.InAppPurchase;<br />
-import com.pozirk.payment.android.InAppPurchaseEvent;<br />
-import com.pozirk.payment.android.InAppPurchaseDetails;<br />
+```actionscript
+import com.pozirk.payment.android.InAppPurchase;
+import com.pozirk.payment.android.InAppPurchaseEvent;
+import com.pozirk.payment.android.InAppPurchaseDetails;
 
 
-//&gt; initialization of InAppPurchase<br />
-_iap:InAppPurchase = new InAppPurchase();<br />
-<br />
-_iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.INIT_ERROR, onInitError);<br />
-<br />
-_iap.init("YOUR_LICENSE_KEY_FOR_THE_APPLICATION");<br />
-<br />
-...<br />
-<br />
-protected function onInitSuccess(event:InAppPurchaseEvent):void<br />
-{<br />
-	//you can restore previously purchased items here<br />
-}<br />
-<br />
-protected function onInitError(event:InAppPurchaseEvent):void<br />
-{<br />
-	trace(event.data); //trace error message<br />
-}<br />
-//&lt;<br />
-<br />
-<br />
-//&gt; making the purchase, _iap should be initialized first<br />
-_iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);<br />
-_iap.purchase("my.product.id", InAppPurchaseDetails.TYPE_INAPP);<br />
-<br />
-protected function onPurchaseSuccess(event:InAppPurchaseEvent):void<br />
-{<br />
-	trace(event.data); //product id<br />
-}<br />
-<br />
-protected function onPurchaseError(event:InAppPurchaseEvent):void<br />
-{<br />
-	trace(event.data); //trace error message<br />
-}<br />
-//&lt;<br />
-<br />
-<br />
-//&gt; getting purchased product details, _iap should be initialized first<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);<br />
-_iap.restore(); //restoring purchased in-app items and subscriptions<br />
-<br />
-...<br />
-<br />
-protected function onRestoreSuccess(event:InAppPurchaseEvent):void<br />
-{<br />
-	//getting details of purchase: time, etc.<br />
-	var purchase:InAppPurchaseDetails = _iap.getPurchaseDetails("my.product.id");<br />
-}<br />
-<br />
-protected function onRestoreError(event:InAppPurchaseEvent):void<br />
-{<br />
-	trace(event.data); //trace error message<br />
-}<br />
-//&lt;<br />
-<br />
-//&gt; getting purchased and not purchased product details<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);<br />
-<br />
-var items:Array&lt;String&gt; = ["my.product.id1", "my.product.id2", "my.product.id3"];<br />
-var subs:Array&lt;String&gt; = ["my.subs.id1", "my.subs.id2", "my.subs.id3"];<br />
-_iap.restore(items, subs); //restoring purchased + not purchased in-app items and subscriptions<br />
-<br />
-...<br />
-<br />
-protected function onRestoreSuccess(event:InAppPurchaseEvent):void<br />
-{<br />
-	//getting details of product: time, etc.<br />
-	var skuDetails1:InAppSkuDetails = _iap.getSkuDetails("my.product.id1");<br />
-<br />
-	//getting details of product: time, etc.<br />
-	var skuDetails2:InAppSkuDetails = _iap.getSkuDetails("my.subs.id1");<br />
-<br />
-	//getting details of purchase: time, etc.<br />
-	var purchase:InAppPurchaseDetails = _iap.getPurchaseDetails("my.purchased.product.id");<br />
-}<br />
-<br />
-protected function onRestoreError(event:InAppPurchaseEvent):void<br />
-{<br />
-	trace(event.data); //trace error message<br />
-}<br />
-//&lt;<br />
-<br />
-<br />
-//&gt; consuming purchased item<br />
-//&gt;&gt; need to retrieve purchased items first<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);<br />
-_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);<br />
-_iap.restore();<br />
-//&lt;&lt;<br />
-<br />
-...<br />
-<br />
-protected function onRestoreSuccess(event:InAppPurchaseEvent):void<br />
-{<br />
-	_iap.addEventListener(InAppPurchaseEvent.CONSUME_SUCCESS, onConsumeSuccess);<br />
-	_iap.addEventListener(InAppPurchaseEvent.CONSUME_ERROR, onConsumeError);<br />
-	_iap.consume("my.product.id");<br />
-}<br />
-//&lt;<br />
+//> initialization of InAppPurchase
+_iap:InAppPurchase = new InAppPurchase();
+
+_iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);
+_iap.addEventListener(InAppPurchaseEvent.INIT_ERROR, onInitError);
+
+_iap.init("YOUR_LICENSE_KEY_FOR_THE_APPLICATION");
+
+...
+
+protected function onInitSuccess(event:InAppPurchaseEvent):void
+{
+	//you can restore previously purchased items here
+}
+
+protected function onInitError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+}
+//<
+
+
+//> making the purchase, _iap should be initialized first
+_iap.addEventListener(InAppPurchaseEvent.PURCHASE_SUCCESS, onPurchaseSuccess);
+_iap.addEventListener(InAppPurchaseEvent.PURCHASE_ALREADY_OWNED, onPurchaseSuccess);
+_iap.addEventListener(InAppPurchaseEvent.PURCHASE_ERROR, onPurchaseError);
+_iap.purchase("my.product.id", InAppPurchaseDetails.TYPE_INAPP);
+
+protected function onPurchaseSuccess(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //product id
+}
+
+protected function onPurchaseError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+}
+//<
+
+
+//> getting purchased product details, _iap should be initialized first
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
+_iap.restore(); //restoring purchased in-app items and subscriptions
+
+...
+
+protected function onRestoreSuccess(event:InAppPurchaseEvent):void
+{
+	//getting details of purchase: time, etc.
+	var purchase:InAppPurchaseDetails = _iap.getPurchaseDetails("my.product.id");
+}
+
+protected function onRestoreError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+}
+//<
+
+//> getting purchased and not purchased product details
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
+
+var items:Array<String> = ["my.product.id1", "my.product.id2", "my.product.id3"];
+var subs:Array<String> = ["my.subs.id1", "my.subs.id2", "my.subs.id3"];
+_iap.restore(items, subs); //restoring purchased + not purchased in-app items and subscriptions
+
+...
+
+protected function onRestoreSuccess(event:InAppPurchaseEvent):void
+{
+	//getting details of product: time, etc.
+	var skuDetails1:InAppSkuDetails = _iap.getSkuDetails("my.product.id1");
+
+	//getting details of product: time, etc.
+	var skuDetails2:InAppSkuDetails = _iap.getSkuDetails("my.subs.id1");
+
+	//getting details of purchase: time, etc.
+	var purchase:InAppPurchaseDetails = _iap.getPurchaseDetails("my.purchased.product.id");
+}
+
+protected function onRestoreError(event:InAppPurchaseEvent):void
+{
+	trace(event.data); //trace error message
+}
+//<
+
+
+//> consuming purchased item
+//>> need to retrieve purchased items first
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_SUCCESS, onRestoreSuccess);
+_iap.addEventListener(InAppPurchaseEvent.RESTORE_ERROR, onRestoreError);
+_iap.restore();
+//<<
+
+...
+
+protected function onRestoreSuccess(event:InAppPurchaseEvent):void
+{
+	_iap.addEventListener(InAppPurchaseEvent.CONSUME_SUCCESS, onConsumeSuccess);
+	_iap.addEventListener(InAppPurchaseEvent.CONSUME_ERROR, onConsumeError);
+	_iap.consume("my.product.id");
+}
+//<
+```
 
 
 # Testing
