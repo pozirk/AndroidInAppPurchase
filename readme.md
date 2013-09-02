@@ -1,11 +1,11 @@
 # About
-AndroidInAppPurchase is an Adobe AIR native extension (ANE) for Android to purchase virtual items.
-It uses Google Play In-app Billing version 3 API.
-Supported functionality:
-- purchase of items;
-- restoration of previously purchased items;
-- consumption of items;
-- subscriptions (not tested).
+AndroidInAppPurchase is an Adobe AIR native extension (ANE) for Android to purchase virtual items.<br />
+It uses Google Play In-app Billing version 3 API.<br />
+Supported functionality:<br />
+- purchase of items;<br />
+- restoration of previously purchased items;<br />
+- consumption of items;<br />
+- subscriptions (not tested).<br />
 
 # Docs
 Please, read docs and try ANE before asking any questions.
@@ -19,9 +19,9 @@ Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AI
 Add the following lines to your AIR Aplication-app.xml file inside &lt;manifestAdditions&gt; section:
 
 &lt;uses-permission android:name="com.android.vending.BILLING" /&gt;
-&lt;application android:enabled="true"&gt;                
-      &lt;activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" /&gt;
- &lt;/application&gt;
+&lt;application android:enabled="true"&gt;
+	&lt;activity android:name="com.pozirk.payment.BillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" android:background="#30000000" /&gt;		
+&lt;/application&gt;
 
 
 # Examples
