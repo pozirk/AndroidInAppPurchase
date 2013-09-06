@@ -31,7 +31,7 @@ package com.pozirk.payment.android
 			if(_ctx != null)
 				_ctx.addEventListener(StatusEvent.STATUS, onStatus);
 			else
-				trace('_ctx is null.');
+				trace('Error! ANE file was not properly added to your project.');
 		}
 		
 		/**
