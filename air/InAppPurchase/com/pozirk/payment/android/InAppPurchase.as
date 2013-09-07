@@ -31,7 +31,10 @@ package com.pozirk.payment.android
 			if(_ctx != null)
 				_ctx.addEventListener(StatusEvent.STATUS, onStatus);
 			else
-				trace('Error! ANE file was not properly added to your project.');
+			{
+				var e:InAppPurchaseEvent = new InAppPurchaseEvent(InAppPurchaseEvent.INIT_ERROR, "Error! ANE file was not properly added to your project.");
+				this.dispatchEvent(e);
+			}
 		}
 		
 		/**
