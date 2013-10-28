@@ -14,7 +14,7 @@ http://help.adobe.com/en_US/air/extensions/index.html<br />
 
 
 # Installation
-Extension ID: com.pozirk.AndroidInAppPurchase
+Extension ID: com.pozirk.AndroidInAppPurchase<br />
 Add "InAppPurchase.ane" and "air\InAppPurchase\bin\InAppPurchase.swc" to your AIR project.<br />
 Add the following lines to your AIR Aplication-app.xml file inside &lt;manifestAdditions&gt; section:<br />
 <br />
