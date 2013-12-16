@@ -30,10 +30,13 @@ import com.pozirk.payment.android.InAppPurchase;
 import com.pozirk.payment.android.InAppPurchaseEvent;
 import com.pozirk.payment.android.InAppPurchaseDetails;
 
+...
+
+protected var _iap:InAppPurchase = new InAppPurchase();
+
+...
 
 //> initialization of InAppPurchase
-_iap:InAppPurchase = new InAppPurchase();
-
 _iap.addEventListener(InAppPurchaseEvent.INIT_SUCCESS, onInitSuccess);
 _iap.addEventListener(InAppPurchaseEvent.INIT_ERROR, onInitError);
 
