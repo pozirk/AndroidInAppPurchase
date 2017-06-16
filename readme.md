@@ -1,3 +1,5 @@
+**UPDATE: I'm not using and not supporting this ANE anymore.**
+
 # About
 AndroidInAppPurchase is an Adobe AIR native extension (ANE) for Android to purchase virtual items.<br />
 It uses Google Play In-app Billing version 3 API.<br />
